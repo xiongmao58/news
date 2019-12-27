@@ -1,0 +1,18 @@
+server:
+  port: 80
+  servlet:
+    context-path: /news
+spring:
+  datasource:
+    username: root
+    password: wspyk
+    url: jdbc:mysql://localhost:3306/press?characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mappers/*Mapper.xml
+comment.avatar: /images/avatar.png
+

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyk.dao.NewsDao">
+    <resultMap id="NewsMap" type="news">
+    <id column="id" property="id" jdbcType="BIGINT"></id>
+    <result column="appreciation" property="appreciation" javaType="boolean"  jdbcType="BIT"></result>
+    <result column="commentabled" property="commentabled" javaType="boolean"  jdbcType="BIT"></result>
+    <result column="content" property="content" jdbcType="VARCHAR"></result>
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP"></result>
+    <result column="description" property="description" jdbcType="VARCHAR"></result>
+    <result column="firstPicture" property="firstPicture" jdbcType="VARCHAR"></result>
+    <result column="flag" property="flag" jdbcType="VARCHAR"></result>
+    <result column="published" property="published" javaType="boolean" jdbcType="BIT"></result>
+    <result column="recommend" property="recommend" javaType="boolean" jdbcType="BIT"></result>
+    <result column="shareStatement" property="shareStatement" javaType="boolean"  jdbcType="BIT"></result>
+    <result column="title" property="title" jdbcType="VARCHAR"></result>
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP"></result>
+    <result column="views" property="views" jdbcType="INTEGER"></result>
+    <result column="type_id" property="type_id" jdbcType="BIGINT"></result>
+    <result column="user_id" property="user_id" jdbcType="BIGINT"></result>
+    <collection property="type" ofType="type">
+        <id column="tid" property="id" jdbcType="BIGINT"></id>
+        <result column="name" property="name"  jdbcType="VARCHAR"></result>
+    </collection>
+    </resultMap>
+
+    <resultMap id="NewsAll" type="news">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="appreciation" property="appreciation" javaType="boolean"  jdbcType="BIT"></result>
+        <result column="commentabled" property="commentabled" javaType="boolean"  jdbcType="BIT"></result>
+        <result column="content" property="content" jdbcType="VARCHAR"></result>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"></result>
+        <result column="description" property="description" jdbcType="VARCHAR"></result>
+        <result column="firstPicture" property="firstPicture" jdbcType="VARCHAR"></result>
+        <result column="flag" property="flag" jdbcType="VARCHAR"></result>
+        <result column="published" property="published" javaType="boolean" jdbcType="BIT"></result>
+        <result column="recommend" property="recommend" javaType="boolean" jdbcType="BIT"></result>
+        <result column="shareStatement" property="shareStatement" javaType="boolean"  jdbcType="BIT"></result>
+        <result column="title" property="title" jdbcType="VARCHAR"></result>
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP"></result>
+        <result column="views" property="views" jdbcType="INTEGER"></result>
+        <result column="type_id" property="type_id" jdbcType="BIGINT"></result>
+        <result column="user_id" property="user_id" jdbcType="BIGINT"></result>
+        <collection property="type" ofType="type">
+            <id column="tid" property="id" jdbcType="BIGINT"></id>
+            <result column="name" property="name"  jdbcType="VARCHAR"></result>
+        </collection>
+        <collection property="user" ofType="user">
+            <id column="uid" property="id" jdbcType="BIGINT"></id>
+            <result column="avatar" property="avatar" jdbcType="VARCHAR"></result>
+            <result column="nickname" property="nickname" jdbcType="VARCHAR"></result>
+        </collection>
+    </resultMap>
+    <select id="getNews" resultType="news"  parameterType="map">
+        SELECT * FROM news
+        WHERE title LIKE concat(concat('%',#{title}),'%')
+        OR  content LIKE concat(concat('%',#{content}),'%')
+        OR  type_id=#{type_id}
+        ORDER BY id
+        limit #{arg0} ,#{arg1}
+    </select>
+
+    <select id="getNewsType" resultType="news">
+        SELECT  *  FROM  news n
+        LEFT JOIN type t ON n.type_id=t.id
+        WHERE recommend='1'
+        ORDER  BY updateTime DESC
+    </select>
+
+    <select id="findTotalCount"  resultType="int">
+        SELECT COUNT(*) FROM news
+    </select>
+    <select id="getNewsAll" resultType="news" parameterType="int">
+        SELECT  *  FROM  news n
+        LEFT JOIN type t ON n.type_id=t.id
+        limit #{arg0},#{arg1}
+    </select>
+    <select id="getNewsById" resultMap="NewsMap" parameterType="long">
+        SELECT
+         n.*,t.id tid,t.name
+        FROM news AS n ,type AS t
+        WHERE  n.type_id=t.id  AND n.id=#{id}
+    </select>
+
+    <select id="getNewsList" resultMap="NewsAll" parameterType="int">
+       select n.* ,t.id tid, t.name ,u.id uid ,u.avatar ,u.nickname
+       from news as n ,type as t ,user as u
+       WHERE n.type_id=t.id AND n.user_id = u.id
+       limit  #{arg0},#{arg1}
+    </select>
+
+    <select id="getContent" resultMap="NewsAll" parameterType="long">
+        select n.* ,t.id tid, t.name ,u.id uid ,u.avatar ,u.nickname
+       from news as n ,type as t ,user as u
+       WHERE n.type_id=t.id AND n.user_id = u.id AND n.id=#{id}
+    </select>
+
+    <insert id="saveNews" parameterType="news">
+        INSERT INTO
+        news(appreciation,commentabled,content,createTime,description,firstPicture,flag,published,recommend,
+        shareStatement,title,updateTime,views,type_id,user_id)
+        VALUES(#{appreciation},#{commentabled},#{content},#{createTime},#{description},
+        #{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},#{updateTime},
+        #{views},#{type_id},#{user_id})
+    </insert>
+    <update id="updateNews" parameterType="news">
+        UPDATE news SET appreciation=#{appreciation},commentabled=#{commentabled},content=#{content},createTime=#{createTime},
+        description=#{description},firstPicture=#{firstPicture},flag=#{flag},published=#{published},recommend=#{recommend},
+        shareStatement=#{shareStatement},title=#{title},updateTime=#{updateTime},views=#{views},type_id=#{type_id},user_id=#{user_id}
+        WHERE id=#{id}
+    </update>
+    <update id="updateViews" parameterType="long">
+        UPDATE news n SET n.views = n.views+1 WHERE n.id= #{id}
+    </update>
+    <delete id="deleteNews" parameterType="long">
+        DELETE FROM news WHERE id=#{id}
+    </delete>
+</mapper>

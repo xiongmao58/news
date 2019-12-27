@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="UTF-8 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/lib/editormd/css/editormd.min.css" th:href="${'lib/editormd/css/editormd.min.css'}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="${'css/me.css'}">
+    <link rel="stylesheet" href="../static/css/headImg_style.css" th:href="${'css/headImg_style.css'}">
+    <title>新闻管理主页</title>
+</head>
+<body>
+
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header">管理后台</h2>
+                <a href="#" th:href="@{/getBackNews}" class="item"><i class="home icon"></i>首页</a>
+                <a href="#" th:href="@{/getBlags}" class="item"><i class="mini idea icon"></i>新闻管理</a>
+                <a href="#"  th:href="@{/types}" class="item"><i class="mini idea icon"></i>新闻分类管理</a>
+                <a href="#" class="item"><i class="mini idea icon"></i>评论管理</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown  item">
+                        <div class="text">
+                            <img class="ui avatar image" src="https://unsplash.it/100/100?image=1005">
+                            pyk
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="#" th:href="@{/showUser}" class="item">显示用户信息</a>
+                            <a href="#"  th:href="@{/getEditPwd}" class="item">修改密码</a>
+                            <a href="#" th:href="@{/logout}" class="item">注销</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <br/><br/><br/>    <br/><br/><br/>    <br/><br/><br/>
+    <!--中间内容-->
+    <div  id="form-container" class="m-container-small m-padded-tb-big">
+        <form class="ui  form error" method="post" th:action="@{/editPwd/{id}(id=*{user.id})}">
+            <div class="two fields">
+                <div class="field error">
+                    <label >密码：</label>
+                    <input name="password" type="password" placeholder="请输入密码">
+                </div>
+                <div class="field error">
+                    <label >手机号：</label>
+                    <input id="id" name="id" type="hidden" th:value="${user.id}">
+                    <input id="phone" name="phone" type="text" placeholder="请输入您的手机号码" >
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field error">
+                    <label>验证码</label>
+                    <input name="code" type="text" placeholder="请输入验证码">
+                </div>
+                <div class="one field">
+                    <input id="btnId" type="button" value="点击获取验证码">
+                </div>
+            </div>
+
+            <div class="ui submit button">
+              <button  class="ui teal button">提交</button>
+            </div>
+            <div class="ui error message">
+                <ul class="list">
+                    <li>请输入6到18位的以英文字母开头的密码</li>
+                    <li>请输入11位的手机号码</li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <br/><br/><br/>    <br/><br/><br/>    <br/><br/><br/>
+    <!--底部footer-->
+    <footer class="ui inverted vertical segment m-padded-th-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../static/images/touxiang.png" th:src="@{/images/touxiang.png}" alt="" class="ui rounded image" style="width: 110px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新新闻</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">喀纳斯冬季白雪覆盖 宛如人间仙境</a>
+                        <a href="#" class="item">中国天文学家发现迄今最大恒星级黑洞</a>
+                        <a href="#" class="item">“剁手”倒计时！欧洲各国预热“黑五”大促</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Eamil:pengyikai58@163.com</a>
+                        <a href="#" class="item">QQ:1395782831</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">新闻网页</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是一个实时的新闻网站，是有关当前热门，争论的一些观点和信息。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright ©️2019 - 2020 NEWS Designed By PYK</p>
+        </div>
+    </footer>
+</body>
+<script src="/static/js/jquery-1.11.0.min.js" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+   $('.ui.form')
+            .form({
+                on: 'blur',
+                fields: {
+                    phone: {
+                        identifier  : 'phone',
+                        rules: [
+                            {
+                                type   : 'regExp[/^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/]',
+                                prompt : '请输入11位的手机号码'
+                            }
+                        ]
+                    },
+                    password: {
+                        identifier  : 'password',
+                        rules: [
+                            {
+                                type   : 'regExp[/^[a-z0-9_-]{6,18}$/]',
+                                prompt : '请输入6到18位的以英文字母开头的密码'
+                            }
+                        ]
+                    },
+                    code: {
+                        identifier  : 'code',
+                        rules: [
+                            {
+                                type   : 'regExp[/^[0-9]{6}$/]',
+                                prompt : '请输入正确格式的验证码'
+                            }
+                        ]
+                    }
+
+                }
+    });
+    $("#btnId").click(function(){
+        var user={
+            id:$("#id").val(),
+            phone:$("#phone").val()
+        };
+        $.ajax({
+            type:"post",
+            url:"/sendCode",
+            dataType:"json",
+            contentType:"application/json;charset=utf-8",
+            data:JSON.stringify(user),
+            success:function(d){
+                console.log(d);
+                if(d =="1"){
+                    $("#btnId").append("<p>验证码发送成功</p>")
+                }else{
+                    $("#btnId").append("<p>验证码发送失败</p>")
+                }
+            },
+            error:function(){
+                alert("请求失败");
+            }
+        });
+
+    });
+
+
+</script>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyk.dao.TypeDao">
+    <insert id="saveType" parameterType="type">
+        INSERT INTO TYPE(name) VALUES (#{name})
+    </insert>
+    <select id="getType" resultType="type">
+        SELECT *  FROM TYPE WHERE id=#{id}
+    </select>
+    <select id="listPage" resultType="type" parameterType="int">
+        SELECT id,NAME  FROM TYPE limit #{arg0},#{arg1}
+    </select>
+    <select id="getTypeByName"  resultType="type" parameterType="String">
+        SELECT id,name FROM TYPE WHERE name=#{name}
+    </select>
+    <select id="findTotalCount" resultType="int">
+        SELECT COUNT(*) FROM TYPE
+    </select>
+    <select id="listType" resultType="type">
+        SELECT * FROM TYPE
+    </select>
+    <update id="updateType" parameterType="type">
+        UPDATE TYPE SET name=#{name} WHERE id=#{id}
+    </update>
+    <delete id="deleteType">
+        DELETE FROM TYPE WHERE id=#{id}
+    </delete>
+
+</mapper>

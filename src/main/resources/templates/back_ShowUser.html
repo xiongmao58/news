@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/lib/editormd/css/editormd.min.css" th:href="${'lib/editormd/css/editormd.min.css'}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="${'css/me.css'}">
+    <link rel="stylesheet" href="../static/css/headImg_style.css" th:href="${'css/headImg_style.css'}">
+    <title>新闻管理主页</title>
+</head>
+<body>
+
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header">管理后台</h2>
+                <a href="#" th:href="@{/getBackNews}" class="item"><i class="home icon"></i>首页</a>
+                <a href="#" th:href="@{/getBlags}" class="item"><i class="mini idea icon"></i>新闻管理</a>
+                <a href="#"  th:href="@{/types}" class="item"><i class="mini idea icon"></i>新闻分类管理</a>
+                <a href="#" class="item"><i class="mini idea icon"></i>评论管理</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown  item">
+                        <div class="text">
+                            <img class="ui avatar image" src="https://unsplash.it/100/100?image=1005">
+                            pyk
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+
+                            <a href="#" th:href="@{/showUser}" class="item">显示用户信息</a>
+                            <a href="#"  th:href="@{/getEditPwd}" class="item">修改密码</a>
+                            <a href="#" th:href="@{/logout}" class="item">注销</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <br/><br/><br/>    <br/><br/><br/>    <br/><br/><br/>
+    <!--中间内容-->
+    <div class="m-container-small m-padded-th-big">
+        <div class="ui container">
+             <table class="ui celled table" th:fragment="newsList">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>用户名</th>
+                        <th>昵称</th>
+                        <th>邮箱</th>
+                        <th>手机号码</th>
+                        <th>头像</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user,iterStat : ${page.beanList}">
+                        <td th:text="${iterStat.count}">1</td>
+                        <td th:text="${user.username}">pyk</td>
+                        <td th:text="${user.nickname}">彭义凯</td>
+                        <td th:text="${user.email}">pengyikai58@163.com</td>
+                        <td th:text="${user.phone}">17714051824</td>
+                        <td th:if="${user.avatar}!=null"><img style="width: 80px;height: 80px;" th:src="@{${user.avatar}}" alt="头像"></td>
+                        <td th:text="${#dates.format(user.updateTime,'yyyy-MM-dd HH:mm:ss')}">2019-11-30 10:45</td>
+                        <td>
+                            <a href="#"  th:href="@{'/getEditUser/'+${user.id}}" class="ui mini teal basic button">编辑</a>
+                            <a href="#" th:href="@{'/getDelUser/'+${user.id}}" class="ui mini red basic button">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="6">
+                            <div class="ui mini pagination menu"  th:if="${page.totalPage}>1">
+                                <a  th:href="@{/showUser(pc=${page.pageCode}-1})}"  th:unless="${page.isFirstPage }" class="item">上一页</a>
+                                <a  th:href="@{/showUser(pc=${page.pageCode}+1})}"  th:unless="${page.isLastPage }" class="item">下一页</a>
+                            </div>
+                            <a href="#" th:href="@{/getAddUser}" class="ui mini right floated teal basic button">新增</a>
+                        </th>
+                    </tr>
+                </tfoot>
+             </table>
+
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">提示：</div>
+                <p th:text="${message}">恭喜，操作成功！</p>
+            </div>
+
+        </div>
+    </div>
+    <br/><br/><br/>    <br/><br/><br/>    <br/><br/><br/>
+    <!--底部footer-->
+    <footer class="ui inverted vertical segment m-padded-th-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../static/images/touxiang.png" th:src="@{/images/touxiang.png}" alt="" class="ui rounded image" style="width: 110px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新新闻</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">喀纳斯冬季白雪覆盖 宛如人间仙境</a>
+                        <a href="#" class="item">中国天文学家发现迄今最大恒星级黑洞</a>
+                        <a href="#" class="item">“剁手”倒计时！欧洲各国预热“黑五”大促</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Eamil:pengyikai58@163.com</a>
+                        <a href="#" class="item">QQ:1395782831</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">新闻网页</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是一个实时的新闻网站，是有关当前热门，争论的一些观点和信息。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright ©️2019 - 2020 NEWS Designed By PYK</p>
+        </div>
+    </footer>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="../static/js/headImg_cropbox.js" th:src="@{/js/headImg_cropbox.js}"></script>
+<script type="text/javascript">
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+    $(function(){
+        $("#addId").click(function(){
+
+            var username=$("#username").val();
+            var   password=$("#password").val();
+            var  nickname=$("#nickname").val();
+            var   email=$("#email").val();
+            var  avatar=$("#avatar").val();
+            var formData = new FormData();
+            formData.append("username",username );
+            formData.append("password",password );
+            formData.append("nickname",nickname );
+            formData.append("email",email );
+            formData.append("avatar",avatar );
+
+            $.ajax({
+                type:"post",
+                url:"/addUser",
+                dataType:"json",
+                //contentType:"application/json;charset=utf-8",
+                cache: false,
+                contentType:false,
+                processDate:false,
+                data:formData,
+                success:function(d){
+                    console.log(d);
+                    if(d =="添加成功"){
+                        alert(d);
+                        window.location.href="/getUserAll";
+                    }else{
+                        alert(d);
+                    }
+                },
+                error:function(){
+                    alert("请求失败");
+                }
+            });
+
+        });
+    });
+    $('.type.example form')
+            .form({
+                on: 'blur',
+                fields: {
+                    username: {
+                        identifier  : 'username',
+                        rules: [
+                            {
+                                type   : 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                                prompt : '请输入4到16位的以英文字母开头的用户名'
+                            }
+                        ]
+                    },
+                    password: {
+                        identifier  : 'password',
+                        rules: [
+                            {
+                                type   : 'regExp[/^[a-z0-9_-]{6,18}$/]',
+                                prompt : '请输入6到18位的以英文字母开头的密码'
+                            }
+                        ]
+                    },
+                    nickname: {
+                        identifier  : 'nickname',
+                        rules: [
+                            {
+                                type   : 'regExp[/^([a-zA-Z0-9_\u4e00-\u9fa5]{3,16})$/]',
+                                prompt : '请输入4到16位的包含字母,数字,汉字,下划线的昵称'
+                            }
+                        ]
+                    },
+                    email: {
+                        identifier  : 'email',
+                        rules: [
+                            {
+                                type   : 'regExp[/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/]',
+                                prompt : '请输入正确的邮箱地址'
+                            }
+                        ]
+                    }
+
+                }
+            });
+</script>
+</html>

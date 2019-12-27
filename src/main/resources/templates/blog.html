@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+    <title>新闻详情</title>
+</head>
+<body>
+
+    <!--导航-->
+    <nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header">新闻</h2>
+                <a href="#" class="item"><i class="home icon"></i>首页</a>
+                <a href="#about" class="item">关于</a>
+                <a href="#contact" class="item">资讯</a>
+                <a href="#contact" class="item">时政</a>
+                <a href="#contact" class="item">财经</a>
+                <a href="#contact" class="item">娱乐</a>
+                <a href="#contact" class="item">体育</a>
+                <a href="#contact" class="item">军事</a>
+                <a href="#contact" class="item">文化</a>
+                <a href="#contact" class="item">社会</a>
+                <a href="#contact" class="item">汽车</a>
+                <div class="right item">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text"  placeholder="请输入关键字">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--中间内容-->
+
+        <div  id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
+            <div class="ui container">
+                <div class="ui top attached segment">
+                    <div class="ui horizontal link list">
+                        <div class="item">
+                            <img src="../static/images/touxiang.png" th:src="@{${news.user.avatar}}" alt="" class="ui avatar image"/>
+                            <div class="content">
+                                <a href="#" class="header" th:text="${news.user.nickname}">pyk</a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="calendar icon" ></i> <span th:text="${#dates.format(news.updateTime,'yyyy-MM-dd')}">2019-11-30</span>
+                        </div>
+                        <div class="item">
+                            <i class="eye icon"></i><span th:text="${news.views}">2342</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui attached segment">
+                    <!--图片区域-->
+                    <img src="../static/images/news4.png" th:src="@{${news.firstPicture}}"  alt="" class="ui fluid rounded image"/>
+                </div>
+                <div class="ui attached padded segment">
+                    <!--内容-->
+                    <div class="ui right aligned basic segment">
+                        <div class="ui orange basic label"  th:text="${news.flag}">引用</div>
+                    </div>
+
+                    <h2 class="ui center aligned header" th:text="${news.title}">法国抗议者抵制“黑色星期五”购物狂潮 在全国抗议亚马逊</h2>
+                    <br/>
+                    <div id="content" class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:utext="${news.content}">
+                        <p>2019年11月29日，环保组织成员封锁了Westfield Les 4 Temps购物中心的入口，抵制“黑色星期五”购物狂潮</p>
+                        <p>腾讯科技讯 11月29日消息，据外媒报道，当地时间周五，活动人士在法国各地举行了针对在线零售商亚马逊的抗议活动，并试图封锁巴黎的一家购物中心，谴责美国“黑色星期五”购物狂潮蔓延到欧洲海岸。
+                        </p>
+                        <p>自从亚马逊等公司将美国感恩节后第二天打折购物日带到欧洲以来，法国公司始终非常热衷于这一天的活动。然而，此举也引发了反弹，这在某种程度上受到环境担忧的推动。
+                        </p>
+                        <p>在西班牙，抗议者也在马德里市中心竖起了一条横幅，上面写着：“消费主义=气候危机。”
+                        </p>
+                        <p>当地时间周五黎明时分，数十名示威者聚集在巴黎克利希区的亚马逊大楼外，在前门外举行静坐抗议。他们举着一块牌子，上面写着：“对亚马逊及其世界说不。”
+                        </p>
+                        <p>欧洲议会左翼议员马农·奥布里(Manon Aubry)表示，抗议活动旨在“谴责亚马逊对社会、环境和财政造成的破坏”。她在Twitter上写道：“从街头到议会，我们继续打击跨国公司的有罪不罚现象。”
+                        </p>
+                        <p>致力于推动全球化的组织Attac发出社交媒体帖子称，法国东部里昂附近的亚马逊物流中心外也发生了静坐抗议。Attac在网上发布的视频显示，戴防暴头盔的警察接走了活动人士。里昂的抗议者竖起的牌子上面写着：“亚马逊，停止扩张，停止过剩生产！”
+                        </p>
+                        <p>在一份电子邮件声明中，亚马逊法国分公司表示尊重人们表达观点的权利，但这并非意味着要扩大到在人们工作的地方组织暴力示威。该公司称：“示威者和Attac正在抛出基于事实错误的不真实指控，并将矛头指向亚马逊，以达到政治目的。”
+                        </p>
+                        <p>周五上午，约40名年轻抗议者试图通过手挽手封锁巴黎拉德尔德区一家大型购物中心的门口，尽管路人仍能通过。
+                        </p>
+                        <p>聚集在商场内商铺外的示威者高呼“工作，消费，闭嘴，这就是给我们年轻人的信息”。抗议者之一拉斐尔（Raphael）说：“我们要把黑色星期五改成街区星期五，它已经成为资本主义的象征。”
+                        </p>
+                        <p>法国在线零售协会Fevad主席弗朗索瓦·蒙博伊斯(Francois Momboisse)谴责了抗议活动。他说：“黑色星期五是一年中销售量最大的日子之一，它使我们能够在更长的时间内实现圣诞节购物的平稳进行，而不是压缩12月10日至24日短短几天里，这并不一定会导致更多的消费。“
+                        </p>
+                        <p>法国立法者周一通过了一项立法修正案，禁止在促销期间进行误导性促销活动，特别是针对“黑色星期五”的宣传活动。这项修正案是旨在打击浪费的新法律的一部分，该法律将推动企业回收未售出的商品。目前还不清楚如何界定或惩罚误导性广告。
+                        </p>
+                        <p>文章来源：腾讯科技</p>
+                    </div>
+                    <!--标签-->
+                    <div class="m-padded-lr">
+                        <div class="ui basic teal left pointing label" th:text="${news.name}">国际</div>
+                    </div>
+
+                    <!--赞赏-->
+                    <div class="ui center aligned basic segment">
+                         <button id="payButton" class="ui orange basic circular button">赞赏</button>
+                    </div>
+                    <div class="ui payQR flowing popup transition hidden">
+                        <div class="ui orange basic label">
+                            <div class="ui images" style="font-size: inherit !important;">
+                                <div class="image">
+                                    <img src="../static/images/erweima.jpg" th:src="@{/images/erweima.jpg}" alt="" class="ui rounded bordered image" style="width: 200px"/>
+                                    <div>微信</div>
+                                </div>
+                                <div class="image">
+                                    <img src="../static/images/erweima.jpg" th:src="@{/images/erweima.jpg}" alt="" class="ui rounded bordered image" style="width: 200px"/>
+                                    <div>支付宝</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui bottom attached segment" th:if="${news.commentabled}">
+                    <!--留言区域列表-->
+                    <div id="comment-container"  class="ui teal segment">
+                        <div th:fragment="commentList">
+                            <div class="ui threaded comments" style="max-width: 100%;">
+                                <h3 class="ui dividing header">评论</h3>
+                                <div class="comment" th:each="comment : ${comments}">
+                                    <a class="avatar">
+                                        <img src="https://unsplash.it/100/100?image=1005" th:src="@{${comment.avatar}}">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">
+                                         <span th:text="${comment.nickname}">Matt</span>
+                                        </a>
+                                        <div class="metadata">
+                                            <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                        </div>
+                                        <div class="text" th:text="${comment.content}">
+                                            How artistic!
+                                        </div>
+                                        <div class="actions">
+                                            <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}" onclick="reply(this)">回复</a>
+                                        </div>
+                                        <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+                                            <div class="comment" th:each="reply : ${comment.replyComments}">
+                                                <a class="avatar">
+                                                    <img src="https://unsplash.it/100/100?image=1005" th:src="@{${reply.avatar}}">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author" >
+                                                        <span th:text="${reply.nickname}">小红</span>
+                                                        <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">博主</div>
+                                                        &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">@ 小白</span>
+                                                    </a>
+                                                    <div class="metadata">
+                                                        <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                                    </div>
+                                                    <div class="text" th:text="${reply.content}">
+                                                        How artistic!
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}" onclick="reply(this)">回复</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="comment">
+                                    <a class="avatar">
+                                        <img src="https://unsplash.it/100/100?image=1005">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">Elliot Fu</a>
+                                        <div class="metadata">
+                                            <span class="date">Yesterday at 12:30AM</span>
+                                        </div>
+                                        <div class="text">
+                                            <p>This has been very useful for my research. Thanks as well!</p>
+                                        </div>
+                                        <div class="actions">
+                                            <a class="reply">回复</a>
+                                        </div>
+                                    </div>
+                                    <div class="comments">
+                                        <div class="comment">
+                                            <a class="avatar">
+                                                <img src="https://unsplash.it/100/100?image=1005">
+                                            </a>
+                                            <div class="content">
+                                                <a class="author">Jenny Hess</a>
+                                                <div class="metadata">
+                                                    <span class="date">Just now</span>
+                                                </div>
+                                                <div class="text">
+                                                    Elliot you are always so right :)
+                                                </div>
+                                                <div class="actions">
+                                                    <a class="reply">回复</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment">
+                                    <a class="avatar">
+                                        <img src="https://unsplash.it/100/100?image=1005">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">Joe Henderson</a>
+                                        <div class="metadata">
+                                            <span class="date">5 days ago</span>
+                                        </div>
+                                        <div class="text">
+                                            Dude, this is awesome. Thanks so much
+                                        </div>
+                                        <div class="actions">
+                                            <a class="reply">回复</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--提交留言区域-->
+                    <div id="comment-form" class="ui form">
+                        <input type="hidden" name="news.id" th:value="${news.id}">
+                        <input type="hidden" name="parentComment.id" value="-1">
+                        <div class="field">
+                            <textarea name="content" placeholder="请输入评论信息..."></textarea>
+                        </div>
+                        <div class="fields">
+                            <div class="field m-mobile-wide m-margin-bottom-small">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    <input type="text" name="nickname" placeholder="姓名" th:value="${session.user}!=null ? ${session.user.nickname}" >
+                                </div>
+                            </div>
+                            <div class="field m-mobile-wide m-margin-bottom-small">
+                                <div class="ui left icon input">
+                                    <i class="mail icon"></i>
+                                    <input type="text" name="email" placeholder="邮箱" th:value="${session.user}!=null ? ${session.user.email}">
+                                </div>
+                            </div>
+                            <div class="field  m-margin-bottom-small m-mobile-wide">
+                                <button id="commentpost-btn" type="button" class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="ui vertical icon buttons ">
+            <div id="toTop-button" class="ui icon button" ><a href="#" class="ui icon button"><i class="chevron up icon"></i></a></div>
+        </div>
+
+        <div class="ui toc-container flowing popup transition hidden" style="width: 250px!important;">
+            <ol class="js-toc">
+
+            </ol>
+        </div>
+
+        <div id="qrcode" class="ui wechat-qr flowing popup transition hidden "style="width: 130px !important;">
+            <!--<img src="./static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 120px !important;">-->
+        </div>
+
+
+    <br/><br/><br/>
+    <!--底部footer-->
+    <footer class="ui inverted vertical segment m-padded-th-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../static/images/touxiang.png" th:src="@{/images/touxiang.png}" alt="" class="ui rounded image" style="width: 110px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新新闻</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">喀纳斯冬季白雪覆盖 宛如人间仙境</a>
+                        <a href="#" class="item">中国天文学家发现迄今最大恒星级黑洞</a>
+                        <a href="#" class="item">“剁手”倒计时！欧洲各国预热“黑五”大促</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Eamil:pengyikai58@163.com</a>
+                        <a href="#" class="item">QQ:1395782831</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">新闻网页</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是一个实时的新闻网站，是有关当前热门，争论的一些观点和信息。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright ©️2019 - 2020 NEWS Designed By PYK</p>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+<script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+<script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+<script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+<script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+<script th:inline="javascript">
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('#payButton').popup({
+        popup : $('.payQR.popup'),
+        on : 'click',
+        position: 'bottom center'
+    });
+
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.js-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.js-toc-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+    });
+
+    $('.toc.button').popup({
+        popup : $('.toc-container.popup'),
+        on : 'click',
+        position: 'left center'
+    });
+
+    $('.wechat').popup({
+        popup : $('.wechat-qr'),
+        position: 'left center'
+    });
+
+    var serurl = /*[[#{news.serurl}]]*/"127.0.0.1:80";
+    var url = /*[[@{/news/{id}(id=${news.id})}]]*/"";
+    var qrcode = new QRCode("qrcode", {
+        text: serurl+url,
+        width: 110,
+        height: 110,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+
+    $('#toTop-button').click(function () {
+        $(window).scrollTo(0,500);
+    });
+
+
+    var waypoint = new Waypoint({
+        element: document.getElementById('waypoint'),
+        handler: function(direction) {
+            if (direction == 'down') {
+                $('#toolbar').show(100);
+            } else {
+                $('#toolbar').hide(500);
+            }
+            console.log('Scrolled to waypoint!  ' + direction);
+        }
+    })
+
+
+    //评论表单验证
+    $('.ui.form').form({
+        fields: {
+            title: {
+                identifier: 'content',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入评论内容'
+                }
+                ]
+            },
+            content: {
+                identifier: 'nickname',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入你的大名'
+                }]
+            },
+            type: {
+                identifier: 'email',
+                rules: [{
+                    type: 'email',
+                    prompt: '请填写正确的邮箱地址'
+                }]
+            }
+        }
+    });
+
+    $(function () {
+        $("#comment-container").load(/*[[@{/comments/{id}(id=${news.id})}]]*/"comments/6");
+    });
+
+
+
+    $('#commentpost-btn').click(function () {
+        var boo = $('.ui.form').form('validate form');
+        if (boo) {
+            console.log('校验成功');
+            postData();
+        } else {
+            console.log('校验失败');
+        }
+
+    });
+
+    function postData() {
+        $("#comment-container").load(/*[[@{/comments}]]*/"",{
+            "parentComment.id" : $("[name='parentComment.id']").val(),
+            "news.id" : $("[name='news.id']").val(),
+            "nickname": $("[name='nickname']").val(),
+            "email"   : $("[name='email']").val(),
+            "content" : $("[name='content']").val()
+        },function (responseTxt, statusTxt, xhr) {
+//        $(window).scrollTo($('#comment-container'),500);
+            clearContent();
+        });
+    }
+
+    function clearContent() {
+        $("[name='content']").val('');
+        $("[name='parentComment.id']").val(-1);
+        $("[name='content']").attr("placeholder", "请输入评论信息...");
+    }
+
+
+    function reply(obj) {
+        var commentId = $(obj).data('commentid');
+        var commentNickname = $(obj).data('commentnickname');
+        $("[name='content']").attr("placeholder", "@"+commentNickname).focus();
+        $("[name='parentComment.id']").val(commentId);
+        $(window).scrollTo($('#comment-form'),500);
+    }
+
+
+
+</script>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="${'css/me.css'}">
+    <title>首页</title>
+</head>
+<body>
+
+    <!--导航-->
+    <nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu"  th:each=" newses : ${pages}">
+                <h2 class="ui teal header">新闻</h2>
+                <a href="#" class="item" th:href="@{/getIndex}"><i class="home icon"></i>首页</a>
+                <a href="#contact" class="item" th:href="@{/getNewsByTypes/{id}(id=*{newses.type_id})}" ><span th:text="${newses.name}">资讯</span></a>
+               <!-- <a href="#contact" class="item">时政</a>
+                <a href="#contact" class="item">财经</a>
+                <a href="#contact" class="item">娱乐</a>
+                <a href="#contact" class="item">体育</a>
+                <a href="#contact" class="item">军事</a>
+                <a href="#contact" class="item">文化</a>
+                <a href="#contact" class="item">社会</a>
+                <a href="#contact" class="item">汽车</a>-->
+                <div class="right item">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text"  placeholder="请输入关键字">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--中间内容-->
+
+        <div class="m-container m-padded-th-big">
+            <div class="ui container">
+                <div class="ui grid">
+
+                    <!--<div class="four wide column">
+                        <div class="ui segments">
+                            <div class="ui secondary segment">
+                                <div class="ui two column grid">
+                                    <div class="left aligned column">
+                                        <i class="ideal icon"></i>军事
+                                    </div>
+                                    <div class="right aligned    column">
+                                        <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui teal segment">
+                                <div class="ui fluid vertical menu">
+                                    <a href="#" class="item">法国抗议者抵制“黑色星期五”购物狂潮 在全国抗议</a>
+                                    <a href="#" class="item">马克龙强调恐怖主义仍是世界最大威胁</a>
+                                    <a href="#" class="item">中国4艘军舰出岛链直奔南海，不是与新航母汇合，印度..</a>
+                                    <a href="#" class="item">巴基斯坦核专家被处决？对美泄露头号导弹机密，印度：..</a>
+                                    <a href="#" class="item">法国为库尔德人伸冤，狠批土耳其行动，巴沙尔：你们没..</a>
+                                    <a href="#" class="item">11月25日晚，空军两架直升机高空相撞！13位英雄..</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segments">
+                            <div class="ui secondary segment">
+                                <div class="ui two column grid">
+                                    <div class="left aligned column">
+                                        <i class="ideal icon"></i>文化
+                                    </div>
+                                    <div class="right aligned    column">
+                                        <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui teal segment">
+                                <div class="ui fluid vertical menu">
+                                    <a href="#" class="item">法国抗议者抵制“黑色星期五”购物狂潮 在全国抗议</a>
+                                    <a href="#" class="item">马克龙强调恐怖主义仍是世界最大威胁</a>
+                                    <a href="#" class="item">中国4艘军舰出岛链直奔南海，不是与新航母汇合，印度..</a>
+                                    <a href="#" class="item">巴基斯坦核专家被处决？对美泄露头号导弹机密，印度：..</a>
+                                    <a href="#" class="item">法国为库尔德人伸冤，狠批土耳其行动，巴沙尔：你们没..</a>
+                                    <a href="#" class="item">11月25日晚，空军两架直升机高空相撞！13位英雄..</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segments">
+                            <div class="ui secondary segment">
+                                <div class="ui two column grid">
+                                    <div class="left aligned column">
+                                        <i class="ideal icon"></i>娱乐
+                                    </div>
+                                    <div class="right aligned    column">
+                                        <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui teal segment">
+                                <div class="ui fluid vertical menu">
+                                    <a href="#" class="item">法国抗议者抵制“黑色星期五”购物狂潮 在全国抗议</a>
+                                    <a href="#" class="item">马克龙强调恐怖主义仍是世界最大威胁</a>
+                                    <a href="#" class="item">中国4艘军舰出岛链直奔南海，不是与新航母汇合，印度..</a>
+                                    <a href="#" class="item">巴基斯坦核专家被处决？对美泄露头号导弹机密，印度：..</a>
+                                    <a href="#" class="item">法国为库尔德人伸冤，狠批土耳其行动，巴沙尔：你们没..</a>
+                                    <a href="#" class="item">11月25日晚，空军两架直升机高空相撞！13位英雄..</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>-->
+
+                    <!--左侧新闻列表-->
+                    <div class="eleven wide column">
+                        <!--新闻头部-->
+                        <div class="ui top attached segment">
+                            <div class="ui middle aligned two column grid">
+                                <div class="column">
+                                    <h3 class="ui teal header">新闻</h3>
+                                </div>
+                                <div class="column"></div>
+                            </div>
+                        </div>
+                        <!--新闻列表-->
+                        <div class="ui attached  segment ">
+                            <div class="ui padded vertical segment m-padded-th-big" th:each="news : ${page.beanList}">
+                                <div class="ui middle aligned  mobile reversed stackable grid">
+                                    <div class="eleven wide column">
+                                        <h3  class="ui header"><a href="#" th:href="@{/getOneNews/{id}(id=${news.id})}" target="_blank" class="m-black" th:text="${news.title}"> 伦敦桥袭击事件致3人死亡，被定性为恐怖袭击</a></h3>
+                                        <p class="m-text" th:text="${news.description}">英国天空新闻网30日报道，当天下午2时左右，一名男子持刀在伦敦桥上袭击路人。警方表示，事件造成包括凶手在内的3人死亡，另有3人受伤正在接受治疗。</p>
+                                        <div class="ui grid">
+                                            <div class="eleven wide column">
+                                                <div class="ui horizontal link list">
+                                                    <div class="item">
+                                                        <img src="../static/images/touxiang.png" th:src="@{${news.user.avatar}}" alt="" class="ui avatar image"/>
+                                                        <div class="content">
+                                                            <a class="header" th:text="${news.user.nickname}">pyk</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item">
+                                                            <i class="calendar icon"></i> <span th:text="${#dates.format(news.updateTime,'yyyy-MM-dd')}">2019-11-21</span>
+                                                    </div>
+                                                    <div class="item">
+                                                            <i class="eye icon"></i><span th:text="${news.views}">2342</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="right aligned five wide column">
+                                                <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin" th:text="${news.type.name}">社会</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="five wide column">
+                                        <a href="#" th:href="@{/getOneNews/{id}(id=${news.id})}"  target="_blank">
+                                            <img src="../static/images/lunbo1.png" th:src="@{${news.firstPicture}}" alt="" class="ui rounded image"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui padded vertical segment m-padded-th-big">
+                                <div class="ui mobile reversed stackable grid">
+
+                                    <div class="eleven wide column">
+                                        <h3  class="ui header">伦敦桥袭击事件致3人死亡，被定性为恐怖袭击</h3>
+                                        <p>英国天空新闻网30日报道，当天下午2时左右，一名男子持刀在伦敦桥上袭击路人。警方表示，事件造成包括凶手在内的3人死亡，另有3人受伤正在接受治疗。</p>
+                                        <div class="ui grid">
+                                            <div class="eleven wide column">
+                                                <div class="ui horizontal link list">
+                                                    <div class="item">
+                                                        <img src="../static/images/touxiang.png" alt="" class="ui avatar image"/>
+                                                        <div class="content">
+                                                            <a class="header">pyk</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <i class="calendar icon"></i> 2019-11-30
+                                                    </div>
+                                                    <div class="item">
+                                                        <i class="eye icon"></i> 2342
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="right aligned five wide column">
+                                                <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin">社会</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="five wide column">
+                                        <a href="#" target="_blank">
+                                            <img src="../static/images/lunbo1.png"  alt="" class="ui rounded image"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui padded vertical segment m-padded-th-big">
+                                <div class="ui mobile reversed stackable grid">
+
+                                    <div class="eleven wide column">
+                                        <h3  class="ui header">伦敦桥袭击事件致3人死亡，被定性为恐怖袭击</h3>
+                                        <p>英国天空新闻网30日报道，当天下午2时左右，一名男子持刀在伦敦桥上袭击路人。警方表示，事件造成包括凶手在内的3人死亡，另有3人受伤正在接受治疗。</p>
+                                        <div class="ui grid">
+                                            <div class="eleven wide column">
+                                                <div class="ui horizontal link list">
+                                                    <div class="item">
+                                                        <img src="../static/images/touxiang.png"  alt="" class="ui avatar image"/>
+                                                        <div class="content">
+                                                            <a class="header">pyk</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <i class="calendar icon"></i> 2019-11-30
+                                                    </div>
+                                                    <div class="item">
+                                                        <i class="eye icon"></i> 2342
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="right aligned five wide column">
+                                                <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin">社会</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="five wide column">
+                                        <a href="#" target="_blank">
+                                            <img src="../static/images/lunbo1.png" alt="" class="ui rounded image"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui padded vertical segment m-padded-th-big">
+                            <div class="ui mobile reversed stackable grid">
+
+                                <div class="eleven wide column">
+                                    <h3  class="ui header">伦敦桥袭击事件致3人死亡，被定性为恐怖袭击</h3>
+                                    <p>英国天空新闻网30日报道，当天下午2时左右，一名男子持刀在伦敦桥上袭击路人。警方表示，事件造成包括凶手在内的3人死亡，另有3人受伤正在接受治疗。</p>
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui horizontal link list">
+                                                <div class="item">
+                                                    <img src="../static/images/touxiang.png" alt="" class="ui avatar image"/>
+                                                    <div class="content">
+                                                        <a class="header">pyk</a>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calendar icon"></i> 2019-11-30
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i> 2342
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="right aligned five wide column">
+                                            <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin">社会</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="five wide column">
+                                    <a href="#" target="_blank">
+                                        <img src="../static/images/lunbo1.png"  alt="" class="ui rounded image"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <!--底部-->
+                        <div class="ui bottom attached segment" th:if="${page.totalPage}>1" >
+                            <div class="ui middle aligned two column grid">
+                                <div class="column">
+                                    <a th:href="@{/news(pc=${page.pageCode}-1)}"  th:unless="${${page.pageCode}-1==0}"  href="#" class="ui teal basic button">上一页</a>
+                                </div>
+                                <div class="right aligned column">
+                                    <a th:href="@{/news(pc=${page.pageCode}+1)}" th:unless="${${page.pageCode}+1!=${page.totalPage}}" href="#" class="ui teal basic button">下一页</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--右边的卡片-->
+                    <div class="five wide column">
+                        <div class="ui segments" th:each=" newses : ${pages}">
+                            <div class="ui secondary segment" >
+                                <div class="ui two column grid">
+                                    <div class="left aligned column">
+                                        <i class="ideal icon" th:text="${newses.name}"></i><!--国际-->
+                                    </div>
+                                    <div class="right aligned   column">
+                                        <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui teal segment">
+                               <div class="ui fluid vertical menu">
+                                   <a href="#" th:href="@{/getOneNews/{id}(id=${newses.id})}" target="_blank"  class="item" th:text="${newses.title}" >法国抗议者抵制“黑色星期五”购物狂潮 在全国抗议</a>
+                                  <!-- <a href="#" class="item">马克龙强调恐怖主义仍是世界最大威胁</a>
+                                   <a href="#" class="item">中国4艘军舰出岛链直奔南海，不是与新航母汇合，印度..</a>
+                                   <a href="#" class="item">巴基斯坦核专家被处决？对美泄露头号导弹机密，印度：..</a>
+                                   <a href="#" class="item">法国为库尔德人伸冤，狠批土耳其行动，巴沙尔：你们没..</a>
+                                   <a href="#" class="item">11月25日晚，空军两架直升机高空相撞！13位英雄..</a>-->
+                               </div>
+                            </div>
+                        </div>
+                        <div class="ui segments">
+                            <div class="ui secondary segment">
+                                <div class="ui two column grid">
+                                    <div class="left aligned column">
+                                        <i class="ideal icon"></i>财经
+                                    </div>
+                                    <div class="right aligned    column">
+                                        <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui teal segment">
+                                <div class="ui fluid vertical menu">
+                                    <a href="#" class="item">法国抗议者抵制“黑色星期五”购物狂潮 在全国抗议</a>
+                                    <a href="#" class="item">马克龙强调恐怖主义仍是世界最大威胁</a>
+                                    <a href="#" class="item">中国4艘军舰出岛链直奔南海，不是与新航母汇合，印度..</a>
+                                    <a href="#" class="item">巴基斯坦核专家被处决？对美泄露头号导弹机密，印度：..</a>
+                                    <a href="#" class="item">法国为库尔德人伸冤，狠批土耳其行动，巴沙尔：你们没..</a>
+                                    <a href="#" class="item">11月25日晚，空军两架直升机高空相撞！13位英雄..</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segments">
+                            <div class="ui secondary segment">
+                                <div class="ui two column grid">
+                                    <div class="left aligned column">
+                                        <i class="ideal icon"></i>体育
+                                    </div>
+                                    <div class="right aligned    column">
+                                        <a href="" target="_blank">more <i class="angle double right icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui teal segment">
+                                <div class="ui fluid vertical menu">
+                                    <a href="#" class="item">法国抗议者抵制“黑色星期五”购物狂潮 在全国抗议</a>
+                                    <a href="#" class="item">马克龙强调恐怖主义仍是世界最大威胁</a>
+                                    <a href="#" class="item">中国4艘军舰出岛链直奔南海，不是与新航母汇合，印度..</a>
+                                    <a href="#" class="item">巴基斯坦核专家被处决？对美泄露头号导弹机密，印度：..</a>
+                                    <a href="#" class="item">法国为库尔德人伸冤，狠批土耳其行动，巴沙尔：你们没..</a>
+                                    <a href="#" class="item">11月25日晚，空军两架直升机高空相撞！13位英雄..</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    <br/><br/><br/>
+    <!--底部footer-->
+    <footer class="ui inverted vertical segment m-padded-th-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../static/images/touxiang.png" th:src="@{/images/touxiang.png}" alt="" class="ui rounded image" style="width: 110px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新新闻</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">喀纳斯冬季白雪覆盖 宛如人间仙境</a>
+                        <a href="#" class="item">中国天文学家发现迄今最大恒星级黑洞</a>
+                        <a href="#" class="item">“剁手”倒计时！欧洲各国预热“黑五”大促</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Eamil:pengyikai58@163.com</a>
+                        <a href="#" class="item">QQ:1395782831</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">新闻网页</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是一个实时的新闻网站，是有关当前热门，争论的一些观点和信息。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright ©️2019 - 2020 NEWS Designed By PYK</p>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyk.dao.CommentDao">
+    <!--<resultMap id="comments" type="comment">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="adminComment" property="adminComment" jdbcType="BIT"></result>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"></result>
+        <result column="content" property="content" jdbcType="VARCHAR"></result>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"></result>
+        <result column="email" property="email" jdbcType="VARCHAR"></result>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"></result>
+        <result column="newses_id" property="newses_id" jdbcType="BIGINT"></result>
+        <result column="parent_comment_id" property="parent_comment_id" jdbcType="BIGINT"></result>
+        <collection property="comment" ofType="comment">
+            <id column="id" property="id" jdbcType="BIGINT"></id>
+            <result column="adminComment" property="adminComment" jdbcType="BIT"></result>
+            <result column="avatar" property="avatar" jdbcType="VARCHAR"></result>
+            <result column="content" property="content" jdbcType="VARCHAR"></result>
+            <result column="createTime" property="createTime" jdbcType="TIMESTAMP"></result>
+            <result column="email" property="email" jdbcType="VARCHAR"></result>
+            <result column="nickname" property="nickname" jdbcType="VARCHAR"></result>
+            <result column="newses_id" property="newses_id" jdbcType="BIGINT"></result>
+            <result column="parent_comment_id" property="parent_comment_id" jdbcType="BIGINT"></result>
+        </collection></resultMap>
+-->
+
+    <select id="listCommentByNewsId" resultType="comment" parameterType="long">
+        SELECT * FROM comment WHERE  newses_id=#{newses_id}
+    </select>
+
+    <select id="findOne" resultType="comment" parameterType="long">
+        SELECT * FROM comment WHERE parent_comment_id=#{parent_comment_id}
+    </select>
+
+    <insert id="saveComment" parameterType="comment">
+      INSERT  INTO  comment(adminComment,avatar,content,createTime,email,nickname,newses_id,parent_comment_id)
+      VALUES(#{adminComment},#{avatar},#{content},#{createTime},#{email},#{nickname},#{newses_id},#{parent_comment_id})
+    </insert>
+</mapper>

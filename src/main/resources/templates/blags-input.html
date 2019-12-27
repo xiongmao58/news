@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <title>新闻发布</title>
+</head>
+<body>
+
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header">管理后台</h2>
+                <a href="#" class="item"><i class="home icon"></i>首页</a>
+                <a href="#" th:href="@{getBlags}" class="item"><i class="mini idea icon"></i>新闻管理</a>
+                <a href="#"  th:href="@{/types}" class="item"><i class="mini idea icon"></i>新闻分类管理</a>
+                <a href="#" class="item"><i class="mini idea icon"></i>评论管理</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown  item">
+                        <div class="text">
+                            <img class="ui avatar image" src="https://unsplash.it/100/100?image=1005">
+                            pyk
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="#" th:href="@{/showUser}" class="item">显示用户信息</a>
+                            <a href="#" th:href="@{/getEditPwd}"  class="item">修改密码</a>
+                            <a href="#" th:href="@{/logout}" class="item">注销</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" th:href="@{getBlagsInput}" class="teal active item">发布</a>
+                <a href="#" th:href="@{getBlags}" class="item">列表</a>
+            </div>
+        </div>
+    </div>
+    <!--中间内容-->
+        <div class="m-container-small m-padded-th-big">
+            <div class="ui container">
+                <form action="#" th:object="${news}" th:action="@{saveNewsInput}" method="post" class="ui form">
+                    <input type="hidden" name="published" th:value="*{published}">
+                    <input type="hidden" name="id" th:value="*{id}">
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <div class="ui selection compact teal basic dropdown label">
+                                <input type="hidden" value="原创"  name="flag" th:value="*{flag}">
+                                <i class="dropdown icon"></i>
+                                <div class="text">原创</div>
+                                <div class="menu">
+                                    <div class="item" data-value="原创">原创</div>
+                                    <div class="item" data-value="转载">转载</div>
+                                    <div class="item" data-value="翻译">翻译</div>
+                                </div>
+                            </div>
+                            <input type="text" name="title" placeholder="标题" th:value="*{title}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div id="md-content" style="z-index: 1 !important;">
+                            <textarea name="content" placeholder="新闻内容" th:text="*{content}" style="display: none">>
+
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="two fields">
+                        <div class="field">
+                            <div class="ui left labeled action input">
+                                <label class="ui compact teal basic label">分类</label>
+                                <div class="ui fluid selection dropdown">
+                                    <input type="hidden" name="name" th:value="*{type}!=null ? *{type.id}">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">分类</div>
+                                    <div class="menu">
+                                        <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">资讯</div>
+                                        <!--<div class="item" data-vlue="2">时政</div>
+                                        <div class="item" data-vlue="3">财经</div>
+                                        <div class="item" data-vlue="4">娱乐</div>
+                                        <div class="item" data-vlue="5">体育</div>
+                                        <div class="item" data-vlue="6">军事</div>
+                                        <div class="item" data-vlue="7">文化</div>
+                                        <div class="item" data-vlue="8">社会</div>
+                                        <div class="item" data-vlue="9">汽车</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="ui left labeled input">
+                            <label class="ui teal basic label">首图</label>
+                            <input type="text" name="firstPicture" th:value="*{firstPicture}"  placeholder="首图引用地址">
+                        </div>
+                    </div>
+
+                    <div class="required field">
+                        <textarea name="description"  th:text="*{description}" placeholder="新闻描述..." maxlength="200"></textarea>
+                    </div><!--th:text="*{description}"-->
+
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" id="recommend" name="recommend" checked th:checked="*{recommend}" class="hidden">
+                                <label for="recommend">推荐</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" id="shareInfo" name="shareStatement" th:checked="*{shareStatement}"  class="hidden">
+                                <label for="shareInfo">转载声明</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" id="appreciation" name="appreciation"  th:checked="*{appreciation}"   class="hidden">
+                                <label for="appreciation">赞赏</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" id="comment" name="commentabled" th:checked="*{commentabled}" class="hidden">
+                                <label for="comment">评论</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui error message"></div>
+
+                    <div class="ui right aligned container">
+                        <button type="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
+                        <button  id="save-btn" class="ui secondary button">保存</button>
+                        <button  id="publish-btn" class="ui teal button">发布</button>
+                    </div>
+                    <input type="hidden" value="@{/lib/editormd/lib/}"/>
+                </form>
+            </div>
+        </div>
+    <br/><br/><br/>
+    <!--底部footer-->
+    <footer  th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-th-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../static/images/touxiang.png" th:src="@{/images/touxiang.png}" alt="" class="ui rounded image" style="width: 110px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新新闻</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">喀纳斯冬季白雪覆盖 宛如人间仙境</a>
+                        <a href="#" class="item">中国天文学家发现迄今最大恒星级黑洞</a>
+                        <a href="#" class="item">“剁手”倒计时！欧洲各国预热“黑五”大促</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Eamil:pengyikai58@163.com</a>
+                        <a href="#" class="item">QQ:1395782831</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">新闻网页</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是一个实时的新闻网站，是有关当前热门，争论的一些观点和信息。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright ©️2019 - 2020 NEWS Designed By PYK</p>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+<script src="../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+<script>
+
+    //初始化Markdown编辑器
+    var contentEditor;
+    $(function() {
+        contentEditor = editormd("md-content", {
+            width   : "100%",
+            height  : 640,
+            syncScrolling : "single",
+           /* path    : "../static/lib/editormd/lib/"*/
+            path    : "lib/editormd/lib/"
+        });
+    });
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+    $('#save-btn').click(function () {
+        $('[name="published"]').val(false);
+        $('#blog-form').submit();
+    });
+
+    $('#publish-btn').click(function () {
+        $('[name="published"]').val(true);
+        $('#blog-form').submit();
+    });
+
+
+    $('.ui.form').form({
+        fields : {
+            title : {
+                identifier: 'title',
+                rules: [{
+                    type : 'empty',
+                    prompt: '标题：请输入新闻标题'
+                }]
+            },
+            content : {
+                identifier: 'content',
+                rules: [{
+                    type : 'empty',
+                    prompt: '标题：请输入新闻内容'
+                }]
+            },
+            typeId : {
+                identifier: 'type.id',
+                rules: [{
+                    type : 'empty',
+                    prompt: '标题：请输入新闻分类'
+                }]
+            },
+            firstPicture : {
+                identifier: 'firstPicture',
+                rules: [{
+                    type : 'empty',
+                    prompt: '标题：请输入新闻首图'
+                }]
+            },
+            description : {
+                identifier: 'description',
+                rules: [{
+                    type : 'empty',
+                    prompt: '标题：请输入新闻描述'
+                }]
+            }
+        }
+    });
+
+</script>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="${'css/me.css'}">
+    <title>新闻分类列表</title>
+</head>
+<body>
+
+    <!--导航-->
+    <nav  th:replace="_fragments :: menu(3)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header">管理后台</h2>
+                <a href="#" class="item"><i class="home icon"></i>首页</a>
+                <a href="#" th:href="@{getBlags}" class="item"><i class="mini idea icon"></i>新闻管理</a>
+                <a href="#"  th:href="@{/types}" class="item"><i class="mini idea icon"></i>新闻分类管理</a>
+                <a href="#" class="item"><i class="mini idea icon"></i>评论管理</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown  item">
+                        <div class="text">
+                            <img class="ui avatar image" src="https://unsplash.it/100/100?image=1005">
+                            pyk
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="#" th:href="@{/showUser}" class="item">显示用户信息</a>
+                            <a href="#" th:href="@{/getEditPwd}"  class="item">修改密码</a>
+                            <a href="#" th:href="@{/logout}" class="item">注销</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" th:href="@{/getBlagsTypesInput}"  class="item">新增</a>
+                <a href="#" th:href="@{/types}"  class="teal active item">列表</a>
+            </div>
+        </div>
+    </div>
+    <!--中间内容-->
+        <div class="m-container-small m-padded-th-big">
+            <div class="ui container">
+                <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                    <i class="close icon"></i>
+                    <div class="header">提示：</div>
+                    <p th:text="${message}">恭喜，操作成功！</p>
+                </div>
+
+                <table class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>名称</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="type,iterStat : ${page.beanList}">
+                       <td th:text="${iterStat.count}">1</td>
+                        <td th:text="${type.name}">国际</td>
+                        <td>
+                            <a href="#" th:href="@{'/getEditTypes/'+${type.id}}" class="ui mini teal basic button">编辑</a>
+                            <a href="#" th:href="@{'/delTypes/'+${type.id}}" class="ui mini red basic button">删除</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="6">
+                            <div class="ui mini pagination menu" th:if="${page.totalPage}>1">
+                                <a th:href="@{/types(pc=${page.pageCode}-1)}"  class="item" >上一页</a>
+                                <a th:href="@{/types(pc=${page.pageCode}+1)}" class=" item">下一页</a>
+                            </div>
+                            <a href="#" th:href="@{/getBlagsTypesInput}"  class="ui mini right floated teal basic button">新增</a>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    <br/><br/><br/>
+    <!--底部footer-->
+    <footer   class="ui inverted vertical segment m-padded-th-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../static/images/touxiang.png" th:src="@{/images/touxiang.png}" alt="" class="ui rounded image" style="width: 110px"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新新闻</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">喀纳斯冬季白雪覆盖 宛如人间仙境</a>
+                        <a href="#" class="item">中国天文学家发现迄今最大恒星级黑洞</a>
+                        <a href="#" class="item">“剁手”倒计时！欧洲各国预热“黑五”大促</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Eamil:pengyikai58@163.com</a>
+                        <a href="#" class="item">QQ:1395782831</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">新闻网页</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是一个实时的新闻网站，是有关当前热门，争论的一些观点和信息。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright ©️2019 - 2020 NEWS Designed By PYK</p>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+    //消息提示关闭初始化
+    $('.message .close')
+            .on('click', function () {
+                $(this)
+                        .closest('.message')
+                        .transition('fade');
+            });
+
+    $('#clear-btn')
+            .on('click', function() {
+                $('.ui.type.dropdown')
+                        .dropdown('clear')
+                ;
+            })
+    ;
+
+    function page(obj) {
+        $("[name='page']").val($(obj).data("page"));
+        loaddata();
+    }
+
+    $("#search-btn").click(function () {
+        $("[name='page']").val(0);
+        loaddata();
+    });
+    function loaddata() {
+        $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
+            title : $("[name='title']").val(),
+            typeId : $("[name='typeId']").val(),
+            recommend : $("[name='recommend']").prop('checked'),
+            page : $("[name='page']").val()
+        });
+    }
+
+</script>
+</html>
